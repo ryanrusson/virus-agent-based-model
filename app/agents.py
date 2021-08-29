@@ -5,7 +5,18 @@ import numpy as np
 
 
 class People:
-    def __init__(self, x, y, who, sdist, xlim=(0, 100), ylim=(0, 100), attraction=0.5, infected=0, step=1):
+    def __init__(
+        self,
+        x,
+        y,
+        who,
+        sdist,
+        xlim=(0, 100),
+        ylim=(0, 100),
+        attraction=0.5,
+        infected=0,
+        step=1,
+    ):
         self.x = x
         self.y = y
         self.xpre = x
@@ -31,8 +42,8 @@ class People:
     def random_step(self, curpos):
         # Momentum
         if random() > self.momentum:
-            #self.xdir = randint(-self.step, self.step)
-            #self.ydir = randint(-self.step, self.step)
+            # self.xdir = randint(-self.step, self.step)
+            # self.ydir = randint(-self.step, self.step)
             self.xdir = uniform(-self.step, self.step)
             self.ydir = uniform(-self.step, self.step)
 
@@ -47,7 +58,10 @@ class People:
 
         # Get the distance from all agents in the space
         a = np.array([self.x, self.y])
-        self.distance = [(who, np.linalg.norm(a - np.array([p[0], p[1]])), (p[0], p[1])) for who, p in enumerate(curpos)]
+        self.distance = [
+            (who, np.linalg.norm(a - np.array([p[0], p[1]])), (p[0], p[1]))
+            for who, p in enumerate(curpos)
+        ]
         self.distance.sort(key=lambda x: x[1])
 
         return self.distance
@@ -59,7 +73,10 @@ class People:
 
         # Get the distance from all agents in the space
         a = np.array([self.x, self.y])
-        self.distance = [(who, np.linalg.norm(a - np.array([p[0], p[1]])), (p[0], p[1])) for who, p in enumerate(curpos)]
+        self.distance = [
+            (who, np.linalg.norm(a - np.array([p[0], p[1]])), (p[0], p[1]))
+            for who, p in enumerate(curpos)
+        ]
         self.distance.sort(key=lambda x: x[1])
 
         # Define the stepdir() function which finds the direction to maximize distance amongst close agents
@@ -70,7 +87,7 @@ class People:
             yavg = np.mean([y[2][1] for y in closest if y[0] != who])
             a = np.array(closest[0][2])
             b = np.array([xavg, yavg])
-            direc = (a - b) / np.linalg.norm(a-b)
+            direc = (a - b) / np.linalg.norm(a - b)
             direc *= step * uniform(0, 1)
 
             return direc

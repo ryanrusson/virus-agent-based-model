@@ -32,7 +32,15 @@ def init():
         yinit = randint(ymin, ymax)
 
         # Set up a "temp" person
-        temp = People(xinit, yinit, idx, socdistance, xlim=(xmin, xmax), ylim=(ymin, ymax), step=step)
+        temp = People(
+            xinit,
+            yinit,
+            idx,
+            socdistance,
+            xlim=(xmin, xmax),
+            ylim=(ymin, ymax),
+            step=step,
+        )
 
         # Set the infected person
         if idx == infected_agent:
@@ -51,7 +59,7 @@ def init():
     return points
 
 
-# Define the run function to update to simulation
+# Define the run function to update the simulation
 def run(i):
     global points, people, distance
 
